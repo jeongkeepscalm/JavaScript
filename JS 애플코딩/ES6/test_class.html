@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.
+        class dogs {
+            constructor (type, color) {
+                this.type = type;
+                this.color = color;
+            }
+            addAge(){
+                if(this instanceof cats) {
+                    this.age++;
+                    console.log(this.age)
+                }
+            }
+        }
+        let dog1 = new dogs ('말티즈', '회색')
+        let dog2 = new dogs ('진돗개', '흰색')
+        console.log(dog1)
+        console.log(dog2)
+
+
+        // 2~3.
+        class cats extends dogs {
+            constructor(type, color, age){
+                super(type, color);
+                this.age = age;
+            }
+        }
+        let cat1 = new cats ('코숏', '빨강', 5)
+        let cat2 = new cats ('러시안블루', '노랑', 2)
+        console.log(cat1)
+        console.log(cat2)
+        cat1.addAge();
+
+
+        // 4.
+        class unit {
+            constructor(attack = 5, hp = 100){
+                this.attack = attack;
+                this.hp = hp;
+            }
+            get battlePoint(){
+                return console.log(this.attack + this.hp) ;
+            }
+            set heal(heal){
+                this.hp += heal;
+            }
+        }
+        let u = new unit();
+        u.battlePoint;
+        u.heal = 50;
+
+        // 5. 
+        var data = {
+            odd : [],
+            even : [],
+            setter : function (...params) {
+                [...params].forEach(function(v){
+                    if (v % 2 === 0) {
+                        data.even.push(v);
+                    } else {
+                        data.odd.push(v);
+                    }
+                })
+            }
+        }
+        data.setter(1,2,3,4,5);
+        console.log(data);
+
+        
+
+    </script>
+</body>
+</html>

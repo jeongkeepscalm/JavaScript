@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <title>Document</title>
+</head>
+<body>
+    <h2>cart</h2>
+    
+    <div id="area"></div>
+
+    <script>
+        let products = [];
+        // circulate localStorage
+        for (let i =0; i<localStorage.length; i++){
+            let product = localStorage.getItem(localStorage.key(i));
+            products.push(JSON.parse(product));
+        }
+
+        console.log(products);
+        if (products.length === 0) {
+            let text = 'no items';
+            document.getElementById('area').insertAdjacentHTML('beforeend', text);
+        } else {
+            products.forEach(function(v,i){
+            let createdNode = 
+                `<div>
+                    <img src="https://via.placeholder.com/50">
+                    <h5>${v.title}</h5>
+                    <p>가격 : ${v.price}</p>
+                </div>`;
+            document.getElementById('area').insertAdjacentHTML('beforeend', createdNode);
+            })
+        }
+
+        
+    </script>
+</body>
+</html>

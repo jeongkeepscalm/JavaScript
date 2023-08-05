@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <link href="test.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <input id="search" placeholder="searchWord입력">
+  </div>
+
+
+  <div class="container">
+    <div class="row product-list">
+      <!-- <div class="col-md-3">
+        <img src="">
+        <h4>상품명 : </h4>
+        <p>가격 : </p>
+      </div> -->
+    </div>
+  
+  </div>
+
+  <div class="container basket-wrap" style="background : #e2e2e2">
+    <h4>장바구니 (드래그 가능)</h4>
+    <div class="row basket">
+      
+    </div>
+  </div>
+  <div class="container my-3">
+    <h4>최종가격</h4>
+    <p class="final-price"></p>
+    <button class="buy">구매하기</button>
+  </div>
+
+
+  <div class="modal1" style="display: none;">
+    <div class="white-bg">
+      <h4>성함</h4>
+      <input type="text" id="name">
+      <h4>phoneNumber</h4>
+      <input type="text" id="phone">
+      <button class="show-receipt">입력완료</button>
+      <div>
+        <button class="close">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal2" style="display: none;">
+    <div class="white-bg">
+      <h4>영수증</h4>
+        <canvas id="canvas" width="350" height="350"></canvas>
+      <div>
+        <button class="close">닫기</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+
+
+    //===========================
+    //상품진열기능
+    //===========================
+
+    let cart = [];
+    let products = [];
+
+    let productsData = [
+            {
+            "id": 0,
+            "title": "식기세척기",
+            "brand": "세척나라",
+            "photo": "pr1.jpg",
+            "price": 10000
+            },
+            {
+            "id": 1,
+            "title": "원목 침대 프레임",
+            "brand": "침대나라",
+            "photo": "pr2.jpg",
+            "price": 20000
+            },
+            {
+            "id": 2,
+            "title": "천연 디퓨저 세트",
+            "brand": "향기나라",
+            "photo": "pr3.jpg",
+            "price": 30000
+            },
+            {
+            "id": 3,
+            "title": "시원한 서큘레이터",
+            "brand": "바람나라",
+            "photo": "pr4.jpg",
+            "price": 40000
+            }
+        ]
+
+      // deep copy data
+      products = JSON.parse(JSON.stringify(productsData));
+
+      // when load this page, draw items
+      products.forEach((a, i) => {
+        $('.product-list').append(`
+          <div class="col-md-3">
+            <div class="item" draggable="true" data-id="${a.id}">
+              <img src="${a.photo}">
+              <h4>${a.title}</h4>
+              <h4>${a.brand}</h4>
+              <p>가격 : ${a.price}</p>
+              <button class="add" data-id="${a.id}">담기</button>
+            </div>
+          </div>`)
+      });
+
+
+      // when add button clicked
+      function moveItemToCart(){
+        $('.add').click(function(e){
+  
+          let productId = e.target.dataset.id;
+  
+          let index = cart.findIndex((a)=>{ return a.id == productId })
+          console.log('foundIndex : ', index)
+  
+          if (index == -1) {
+            let product = products.find((a)=> { return a.id == productId });
+            product.count = 1; // 없는 변수 생성해서 값을 집어넣어줌. 
+            cart.push(product); 
+          } else {
+            cart[index].count++;
+          }
+          console.log(cart);
+  
+          // draw item in a cart
+          $('.basket').html('');
+          cart.forEach((a, i)=>{
+            $('.basket').append(
+              `
+              <div class="col-md-3 bg-white">
+                <img src="${a.photo}">
+                <h4>${a.title}</h4>
+                <h4>${a.brand}</h4>
+                <p>${a.price}</p>
+                <input type="number" value="${a.count}" class="item-count w-100">
+              </div>
+              `
+            );
+          });
+          // JavaScript
+          // document.getElementsByClassName('basket')[0].innerHTML = '';
+          // cart.forEach((product, index)=> {
+          //   let addText = 
+          //     `
+          //       <div class="col-md-3 bg-white">
+          //         <img src="${product.photo}">
+          //         <h4>${product.title}</h4>
+          //         <h4>${product.brand}</h4>
+          //         <p>${product.price}</p>
+          //         <input type="number" value="${product.count}" class="item-count w-100">
+          //       </div>
+          //     `;
+          //   document.getElementsByClassName('basket')[0].insertAdjacentHTML('beforeend', addText);
+          // });
+  
+  
+          // calculate total price
+          calTotalPrice();
+  
+          // when selectBox's value in a cart is changed
+          $('.item-count').on('input', function(){
+            calTotalPrice();
+          });
+        }); //add버튼 끝
+      }
+      moveItemToCart();
+
+      // drag function
+      // dragstart : 드래그 가능하게 함.
+      // dragenter : 드래그한 객체가 특정 부분에 진입했을 경우. 
+      // dragover : 드래그하면서 마우스가 대상 객체의 영역 위에 자리 잡고 있을 때 발생함.
+      // drop : 리스너는 드래그된 데이터를 가져와서 드롭 위치에 놓는 역할을 함.
+      // drop 은 dropover랑 같이 사용해야 함. 
+      // drop 이벤트 역시 드롭될 요소에는 e.preventDefault()를 사용하지 않으면, 정상적인 동작이 되지 않을 수 있으므로  
+      // 이벤트에 preventDefault() 코드를 작성하는 것이 좋다.
+      $('.item').on('dragstart', function(e) {
+        console.log('start drag')
+        // 드래그시 드래그 놓일 곳에 값을 넘겨주기위해 데이터를 셋 해줌. 
+        e.originalEvent.dataTransfer.setData('id', e.target.dataset.id)
+      });
+
+      document.querySelectorAll('.basket')[0].addEventListener('dragenter', function () {
+        console.log('an item entered')
+      })
+
+      $('.basket').on('dragover', function(e) {
+        e.preventDefault();
+        console.log("드래그 요소가 이 영역에 위에 계속 위치하면 발생하는 이벤트");
+      });
+
+      $('.basket').on('drop', function(e) {
+        e.preventDefault();
+        let productId = e.originalEvent.dataTransfer.getData('id');
+        console.log(typeof productId);
+
+        $('.add').eq(productId).click();
+        // JavaScript
+        // for (let i = 0; i < document.getElementsByClassName('add').length; i++) {
+        //   if (i === Number(productId)) {
+        //     document.getElementsByClassName('add')[i].click();
+        //   }
+        // }
+      });
+
+    // calculate total price and show it.
+    function calTotalPrice(){
+      let finalPrice = 0;
+      for (let i = 0; i < $('.item-count').length; i++){
+        var price = $('.item-count').eq(i).val();
+        var count = $('.item-count').eq(i).siblings('p').text();
+        finalPrice += parseFloat(price * count);
+      }
+      $('.final-price').html('합계 : ' + finalPrice)
+    }
+
+    // modal
+    $('.buy').click(function(){
+      $('.modal1').css('display', 'block');
+    });
+    // JavaScript
+    // document.getElementsByClassName('buy')[0].addEventListener('click', function () {
+    //   document.getElementsByClassName('modal1')[0].style.display = 'block';
+    // });
+
+
+    //모달창1에 뭐 입력하면 전역변수에 저장해둠
+
+    let name = '';
+    let phoneNumber = '';
+
+    $('#name').on('input', function(){
+      name = $('#name').val();
+    });
+
+    $('#phone').on('input', function(){
+      phoneNumber = $('#phone').val();
+    });
+    // JS
+    // document.getElementById('phone').addEventListener(
+    //   'input', () => phoneNumber = document.getElementById('phone').value )
+
+    // show receipt modal
+    $('.show-receipt').click(function(){
+      $('.modal1').css('display', 'none');
+      $('.modal2').css('display', 'block');
+
+      var canvas = document.getElementById('canvas');
+      var c = canvas.getContext('2d');
+      if (!c) return;
+      c.font = '16px dotum';
+      c.fillText('구매자 : ' + name, 20, 30);
+      c.fillText('phoneNumber : ' + phoneNumber, 20, 60); 
+      c.fillText($('.final-price').html(), 20, 90); 
+    })
+
+    // search 
+    $('#search').on('input', function(){
+      let searchWord = $('#search').val();
+
+      let newProducts = products.filter((a)=>{
+        return a.title.includes(searchWord) || a.brand.includes(searchWord)
+      });
+
+      $('.product-list').html('');
+      newProducts.forEach((a, i) => {
+        $('.product-list').append(`
+          <div class="col-md-3">
+            <img src="${a.photo}">
+            <h4>${a.title}</h4>
+            <h4>${a.brand}</h4>
+            <p>가격 : ${a.price}</p>
+            <button class="add" data-id="${a.id}">담기</button>
+          </div>`)
+      });
+
+      //jQuery로 여러개 찾은건 each반복문 붙여야 잘됨 
+
+      $('.product-list h4').each(function(i, element){
+        console.log('i : '+i);                                                                                                                           
+        console.log('element : ' + element);
+        let title = element.innerHTML;
+        console.log('title : '+title);
+        title = title.replace(searchWord, `<span style="background : yellow">${searchWord}</span>`);
+        console.log(title);
+
+        element.innerHTML = title;
+      })
+      moveItemToCart();
+      
+    });
+
+    // close all modal
+    $('.close').click(function(e){
+      $(e.target).parents('.modal1').css('display', 'none');
+      $(e.target).parents('.modal2').css('display', 'none');
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

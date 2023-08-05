@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header1 = document.querySelector('#textContent');
+      const header2 = document.querySelector('#innerHTML');
+
+      // 값 추출 (해당 아이디 값의 텍스트 읽어오기)
+      console.log(header1.textContent);
+      console.log(header2.innerHTML);
+
+      header1.textContent="원하는<br> 문자열"; // <br>을 그대로 출력. 주로 많이 사용. 
+      header2.innerHTML="원하는<br> 문자열"; // <br> 줄바꿈 적용. 보안 문제상 많이 사용 x. 
+      
+    });
+
+
+  </script>
+
+</head>
+<body>
+    <h1 id="textContent">textContent 기존문자열</h1>
+    <h1 id="innerHTML">innerHTML 기존문자열</h1>
+
+</body>
+</html>

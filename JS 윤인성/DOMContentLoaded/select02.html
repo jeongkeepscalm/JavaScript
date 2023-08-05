@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      const text = document.querySelector('input[type=text]')
+      const span = document.querySelector('span')
+      const select = document.querySelector('select')
+      const f = () => {
+        const v = Number(text.value);
+        const selected = select.options[select.options.selectedIndex];
+        span.textContent = `${v * selected.value}`
+      }
+      text.addEventListener('keyup', f)
+      select.addEventListener('change', f)
+    })
+  </script>
+</head>
+<body>
+  <input type="text" value="0" style='width:50px'>cm = <span>0</span>
+  <select>
+    <option value="10">mm</option>
+    <option value="0.01">m</option>
+    <option value="0.393701">inch</option>
+  </select>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // ES5 : create(부모) : 상속 
+        var 부모1 = { name : 'Kim', age : 50 };
+        var 자식1 = Object.create(부모1); // 자식이라는 object는 부모를 prototype으로 두게 된다.
+        console.log(자식1);
+        console.log(자식1.age);
+
+
+        var 부모2 = { name : 'Kim', age : 50 };
+        var 자식2 = Object.create(부모2);
+        자식2.age  = 20;
+        console.log(자식2.age); //20 나옴
+
+
+        var 부모 = { name : 'Kim', age : 50 };
+        var 자식 = Object.create(부모);
+        자식.age  = 20;
+        var 손자 = Object.create(자식);
+        console.log(손자.age); // 20
+
+
+
+
+
+
+    </script>
+</body>
+</html>

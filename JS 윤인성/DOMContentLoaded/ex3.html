@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const img = document.querySelector('img');
+      img.setAttribute("src", "http://placekitten.com/200/200"); // 이미지 넣고
+      console.log(img.getAttribute("src")); // http://placekitten.com/200/200가 출력.
+
+
+      // 표준에 있는 이름은 그냥 활용 가능. 
+      img.src = "http://placekitten.com/200/100";
+      console.log(img.src);
+    });
+
+  
+    
+  </script>
+
+</head>
+<body>
+    <img src="" alt="">
+</body>
+</html>

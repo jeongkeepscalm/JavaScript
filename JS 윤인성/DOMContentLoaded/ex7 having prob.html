@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    doccument.addEventListener('DOMContentLoaded', ()=>{
+
+      let counter = 0;
+      const listener = () => {
+        header.textContent = `클릭횟수 : ${++counter}`
+      }
+      
+      const header = document.createElement('h1');
+      header.textContent=`클릭 횟수 : 0`
+
+      const p = document.createElement('p')
+      p.textContent = '이벤트 연결 상태 : 해제'
+
+      const connectBtn = document.createElement('button')
+      connectBtn.textContent = '이벤트 연결 버튼'
+      connectBtn.addEventListener('click', ()=>{
+        header.addEventListener('click', listener)
+        p.textContent='이벤트 연결 상태 : 연결'
+      })
+
+      const disconnectBtn = document.createElement('button');
+      disconnectBtn.textContent="이벤트 해제 버튼"
+      disconnectBtn.addEventListener('click',()=>{
+        header.removeEventListener('click',listener)
+        p.textContent='이벤트 연결 상태 : 해제'
+      })
+
+      const body = document.querySelector('body')
+    
+      document.body.appendChild(header)
+      document.body.appendChild(connectBtn)
+      document.body.appendChild(disconnectBtn)
+      document.body.appendChild(p)
+
+    })
+    
+    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

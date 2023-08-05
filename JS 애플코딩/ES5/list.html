@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+
+    <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+          <img src="https://via.placeholder.com/50" class="w-100">
+          <h5></h5>
+          <p></p>
+        </div>
+    </div>
+
+    <input type="button" id="btn" value="Get More Items"/>
+    <input type="button" id="btn2" value="Sort Items By Title"/>
+    <input type="button" id="btn3" value="Change Won to Dallor"/>
+    <input type="button" id="filter" value="Under 60 thousand won">
+  </div>
+  
+  <script>
+    var products = [
+      { id : 0, price : 70000, title : 'Blossom Dress' },
+      { id : 1, price : 50000, title : 'Springfield Shirt' },
+      { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+
+    // deep copy
+    let copyProducts = JSON.parse(JSON.stringify(products));
+    console.log('copyProducts : ',copyProducts)
+
+    let arr2 = [1,2,3,4,5,6,7];
+    let sortedArr2 = arr2.filter(function(value){
+      return value > 2;
+    })
+    console.log(sortedArr2);
+
+    
+    let row = document.getElementsByClassName('row')[0];
+    row.innerHTML = '';
+    products.forEach(function(v,i) {
+      let addContext = 
+      `<div class="col-sm-4">
+        <img src="https://via.placeholder.com/50" class="w-100">
+        <h5>${v.title}</h5>
+        <p>가격 : ${v.price}</p>
+        <input type='button' value='purchase' onclick='purchase(${v.id})' class='purchase'/>
+      </div>`;
+      row.insertAdjacentHTML('beforeend', addContext);
+    })
+    clickEvent();
+
+    let count = 0; 
+    document.getElementById('btn').addEventListener('click', function(){
+      ++count;
+      if (count === 1) {
+        fetch('https://codingapple1.github.io/js/more1.json')
+        .then(res => res.json())
+        .then(function (data) {
+          getItem(data);
+        })
+      } else {
+        fetch('https://codingapple1.github.io/js/more2.json')
+        .then(res => res.json())
+        .then(function (data) {
+          getItem(data);
+        })
+        document.getElementById('btn').style.display = 'none';
+      }
+    })
+
+    function getItem(data){
+      data.forEach(function(v, i){
+        let result = copyProducts.find(function(product){
+          return product.id === v.id
+        });
+        if (result === undefined) copyProducts.push(v);
+        let addContext = 
+        `<div class="col-sm-4">
+          <img src="https://via.placeholder.com/50" class="w-100">
+          <h5>${v.title}</h5>
+          <p>가격 : ${v.price}</p>
+          <input type='button' value='purchase' onclick='purchase(${v.id})' class='purchase'/>
+        </div>`;
+      row.insertAdjacentHTML('beforeend', addContext);
+    })
+      clickEvent();
+    }
+
+    document.getElementById('btn2').addEventListener('click', function(){
+      // arr.sort() 
+      // a-b 양수 then a 오른쪽
+      // a-b 음수 then b 오른쪽
+        let sortProducts = copyProducts.sort(function(a,b){
+        if(a.title > b.title)  {
+          return 1;
+        } else {
+          return -1;
+        }
+      })
+      document.getElementsByClassName('row')[0].innerHTML = '';
+      getItem(sortProducts);
+    })
+
+    document.getElementById('btn3').addEventListener('click', function(){
+      let wonToDollar = copyProducts.map(function(product){
+        return (product.price / 1000).toFixed();
+      })
+      for (let i = 0; i < copyProducts.length; i++) {
+        copyProducts[i].price = wonToDollar[i];
+      }
+      document.getElementsByClassName('row')[0].innerHTML = '';
+      getItem(copyProducts);
+    })
+
+
+    document.getElementById('filter').addEventListener('click',function(){
+      let edited = copyProducts.filter(function(product){
+        return product.price <= 60000;
+      })
+      copyProducts = edited;
+      document.getElementsByClassName('row')[0].innerHTML = '';
+      getItem(edited);
+    })
+
+    function purchase(id) {
+      copyProducts.forEach(function(v,i){
+        if (v.id === id) {
+          localStorage.setItem(v.id, JSON.stringify(v));
+        }
+      })
+    }
+
+    // JS로는 한번에 여러 노드에 이벤트를 주지 못함. 
+    // document.querySelectorAll('.purchase').addEventListener('click', function(){
+    //   alert('')
+    // })
+    function clickEvent(){
+      $('.purchase').on('click', function(e){
+        let title = $(e.target).siblings('h5').text()
+        console.log(title);
+      })
+    }
+    
+
+    
+  </script> 
+
+</body>
+</html>

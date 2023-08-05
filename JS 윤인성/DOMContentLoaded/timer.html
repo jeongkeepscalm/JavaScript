@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      // let seconds = 0
+      // let timer = 0
+      let [seconds, timer] = [0,0]
+      const checkbox = document.querySelector('input[type=checkbox]')
+      const h1 = document.querySelector('h1')
+
+      checkbox.addEventListener('change',()=>{
+        if(checkbox.checked) {
+          timer = setInterval(() => {
+            seconds += 1;
+            h1.textContent = `${seconds}초`
+          }, 1000);
+        } else {
+          clearInterval(timer) 
+        }   
+      })
+    })
+  </script>
+</head>
+<body>
+  <input type="checkbox">타이머 활성화
+  <h1 id="checkbox"></h1>
+</body>
+</html>

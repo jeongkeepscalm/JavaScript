@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 내부에 있는 name, age 변수를 직접 건드리지 않아 실수를 방지
+        var 사람 = {
+            name : 'Kim',
+            age : 30,
+            set setAge(나이){
+                this.age = parseInt(나이)
+            },
+            get nextAge(){
+                return  this.age + 1  
+            }
+        }
+        // 사람.setAge('200'); // 문자 넣었는데도 숫자 200으로 저장됨
+        사람.setAge = 40; //set 키워드를 추가하면 이렇게 함수를 사용가능 // set setAge(나이)
+        console.log(사람.nextAge)
+
+    </script>
+</body>
+</html>

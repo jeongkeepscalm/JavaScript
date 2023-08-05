@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function 함수(...rest){
+        //     for (var i = 0; i < rest.length; i++) {
+        //         console.log(rest[i]);
+        //     }
+        // }
+        // 함수(1,2,3,4,5,6,7,8);
+
+
+        function addAll(...rest) {
+            let sum = 0; 
+            console.log(typeof rest) // object
+            console.log(typeof rest[3]) // number
+            for (value of rest) {
+                sum += value
+            }
+            console.log('sum : ', sum)
+        }
+        addAll(1,2,3,4,10)
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<script>
+
+  const a = function(obj) {
+    obj.status = obj.status !== undefined ? obj.status : '이상 없음.'
+    return `${obj.name}, ${obj.age}, ${obj.status}`
+  }
+
+  const pet = {
+    name : 'tommy',
+    age :  8
+  }
+
+  console.log(a(pet))
+
+  // pet.color = 'brown';
+  // pet.kind = 'a1';
+  // console.log(pet);
+  // delete pet.kind;
+  // console.log(pet);
+
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // done, fail -> then, catch
+        $.get('https://codingapple1.github.io/hello.txt')
+        .done(function(res){
+        console.log(res);
+        })
+        .fail(function(error){
+        console.log('fail');
+        })
+
+        // 서버에서 데이터를 주고 받을 때는, 문자만 주고 받기 가능. 
+        fetch('https://codingapple1.github.io/price.json')
+        .then(res => res.json()) // fetch() 로 가져온 결과(json)를 array/object로 바꿈. 
+        .then(function(data){
+        console.log(data);
+        })
+    </script>
+</body>
+</html>

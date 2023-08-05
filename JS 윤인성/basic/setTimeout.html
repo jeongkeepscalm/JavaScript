@@ -1,0 +1,19 @@
+<script>
+
+const a = setTimeout(() => {
+  console.log(`setTimeout function`);
+}, 1000);
+
+const b = setInterval(() => {
+  console.log(`setInterval function`);
+}, 1000);
+
+console.log(a,b);  // 2 3
+
+clearTimeout(a);
+clearInterval(b);
+
+
+
+
+</script>

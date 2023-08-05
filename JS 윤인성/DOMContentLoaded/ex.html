@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <script>document.body.innerHTML += '<h1>A</h1>'</script> 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // addEventListener로 문서 객체 조작 가능. 
+
+      // document.querySelector()로 선택자를 읽음. 
+       
+      document.querySelector('h1').style.color = 'red';
+      document.querySelector('#header').style.backgroundColor = 'orange';
+      document.querySelector('.center.head').style.textAlign = 'center';
+      document.querySelector('[type=text]').style.borderRadius = '10px'
+      document.querySelector('body input').style.backgroundColor = 'blue';
+        for (const element of document.querySelectorAll('input')) {
+          element.style.backgroundColor ='purple';
+        }
+        for (const element of document.querySelectorAll('[type=text]')){
+          element.style.borderRadius="10px";
+        }
+    });
+
+
+
+  // 문서 객체를 조작할 수 있는 위치는 크게 해드태그 안에 스크립트태그 안의 돔 컨탠츠 와
+  // 바디 태그 마지막에 배치한 스크립트 이렇게 두 군데로 볼 수 있다. 
+  </script>
+
+</head>
+<body>
+  <script>document.body.innerHTML += '<h2>B</h2>'</script>
+  
+  <h1 id="header" class="center head">공백</h1>
+  
+  <input type = "text">
+  <input type = "text">
+
+
+</body>
+</html>

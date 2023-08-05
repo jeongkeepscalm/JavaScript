@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="btn" value="button">
+    <script>
+        // promise 를 더 쉽게 사용하는 async, await
+        
+        // async 키워드를 사용하면 Promise 오브젝트가 저절로 생성됨.
+        // cal() 함수를 실행하면 그 자리에 Promise 인스턴스 (new Promise() 로 만든 오브젝트)가 남는다.
+        async function add1(){
+            return 2 + 1
+        }
+        add1().then(function(res){
+            console.log(`result : ${res}`)
+        })
+
+        // then() 함수가 귀찮다면 await키워드를 사용하면 된다. 
+        // async 키워드를 사용한 함수에는 await 사용 가능.
+        // await은 promise.then() 대체품이라 생각하면 됨. then보다 훨씬 간단. 
+
+        async function add2() {
+            let promise = new Promise((resolve, reject) => {
+                let res = 1 + 6;
+                resolve(res);
+            })
+            promise.then((res) => console.log(`result : ${res}`))
+        }
+        add2();
+
+        // => await 사용하면,
+        async function add3() {
+            let promise = new Promise((resolve, reject)=>{
+                let result = 6 + 6;
+                resolve(result);
+            })
+            result = await promise;
+            console.log(result)
+        }
+        add3();
+
+        // promise 실패 시
+        async function add4(){
+            let promise = new Promise((resolve, reject)=> {
+                reject();
+            })
+            try {let result = await promise }
+            catch { console.log('rejected') };
+        }
+        add4();
+
+        
+        async function click(){
+            let promise = new Promise((resolve, reject)=>{
+                document.getElementById('btn').addEventListener('click', function(){
+                    resolve();
+                })
+            })
+            let result = await promise;
+            console.log('sss');
+        }
+        click();
+
+    </script>
+</body>
+</html>

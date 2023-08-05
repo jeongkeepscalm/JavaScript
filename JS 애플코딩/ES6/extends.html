@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class 할아버지{
+        constructor(name){
+                this.성 = 'Kim';
+                this.이름 = name;
+            }
+            sayHi(){
+                console.log('안녕 나는 할아버지')
+            }
+        }
+
+        class 아버지 extends 할아버지 {
+            constructor(name){
+                super(name); // === extends로 상속중인 부모 class의 constructor()
+                this.나이=50;
+            }
+            sayHi2(){
+                console.log('안녕 나는 아버지');
+                super.sayHi();
+            }
+        }
+        console.log(new 아버지('정길'))
+
+        var a = new 아버지('만수');
+        a.sayHi();
+
+        a.sayHi2();
+    </script>
+</body>
+</html>

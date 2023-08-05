@@ -1,0 +1,17 @@
+<script>
+
+  const max = function (a){
+    if (Array.isArray(a)) {
+      let output = a[0];
+      for (const aa of a ){
+        if (output < aa ) {
+          output = aa
+        }
+      }
+      return output;
+    }
+  }
+  console.log(max([1,2,3,4]));
+
+// Array.isArray(a) a가 배열이면 true 아니면 false
+</script>

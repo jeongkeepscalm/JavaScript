@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // for in : 객체
+        let obj = {name : 'oh', age: 30};
+        
+        // enumerable : true 인 것들만 for in 반복문으로 돌릴 수 있음. 
+        console.log(Object.getOwnPropertyDescriptor(obj, 'name'));
+        Object.defineProperty(obj, 'name', {enumerable : false});
+        console.log(Object.getOwnPropertyDescriptor(obj, 'name'));
+
+        for (const key in obj) {
+            console.log(obj[key])
+        }
+
+        class parents {
+
+        }
+        parents.prototype.name = 'Park';
+        let object = new parents();
+        for (const key in object) {
+            if (object.hasOwnProperty(key)) {
+                console.log('object : '+object[key]);
+            }
+        }
+
+        // for of : 배열, 문자, arguments, NodeList, Map, Set 
+        // iterable인 자료형들에만 적용가능한 반복문
+        // iterable한 자료형 : [Symbol.iterator]() 이라는 일종의 메소드를 가지고 있는 자료형
+        var arr = [2,3,4,5];
+        console.log( 'arr[Symbol.iterator]() : ',arr[Symbol.iterator]() );
+
+        // for of 는 nodeList에서 사용 가능. 
+        // NodeList : document.getElementsByClassName()이나 document.querySelectorAll() 으로 찾은 요소들.
+        // [] 대괄호안에 담겨오는데 array는 아니고 NodeList라는 자료형이다. 
+
+
+        var products = [
+            {
+                name1 : 'chair',
+                price1 : 7000,
+            },
+            {
+                name2 : 'sofa',
+                price : 5000,
+            },
+            {
+                name1 : 'desk',
+                price3 : 9000,
+            },
+        ]; 
+        
+        for (let product of products) {
+            for ( let key in product) {
+                let reg = /[0-9]/;
+                if(reg.test(key)){
+                    // key 생성후 제거.
+                    product[key.slice(0,-1)] = product[key];
+                    delete product[key];
+                }
+            }
+        }
+        console.log(products);
+
+        // let newValue;
+        // let newKey;
+        // for (let item of products) {
+        //     for (let key in item) {
+        //         //마지막글자를 숫자로변환했을 때 NaN이 안나오면 (숫자면)
+        //         if (isNaN(parseInt(key.slice(-1))) == false ) {
+        //         newValue = item[key];
+        //         newKey = key.slice(0, -1); 
+        //         item[newKey] = newValue;
+        //         delete item[key]; 
+        //         }
+        //     }
+        // }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // const a = document.createElement('h2');
+      // a.textContent="added content";
+      // a.style.color="blue";
+      // const first = document.querySelector('.first');
+      // const second = document.querySelector('.second');
+      // const toFirst = () => {
+      //   first.appendChild(a);
+      //   setTimeout(toSecond, 1000);
+      // }
+      // const toSecond = () => {
+      //   second.appendChild(a);
+      //   setTimeout(toFirst, 1000);
+      // }
+      // toFirst();
+      
+
+      const text = document.createElement('h3');
+      text.textContent = 'added text';
+      text.style.color = 'purple';
+
+      const first = document.querySelector('.first');
+      const second = document.querySelector('.second');
+      const arr = [first, second]
+      let cnt = 0;
+      const func = () => {
+        arr[cnt%2].appendChild(text)
+        cnt++;
+      }
+      func();
+      setInterval(func , 2000);
+
+      // 1. setTimeout(함수명, 시간)
+      // 2. setTimeout(() => {
+      //       ~
+      //    }, 1000);
+
+    })
+  </script>
+</head>
+<body>
+  <div class="first">
+    <h1>first div tag</h1>
+  </div>
+  <hr>
+  <div class="second">
+    <h1>second div tag</h1>
+  </div>
+</body>
+</html>

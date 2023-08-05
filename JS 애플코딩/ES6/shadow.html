@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="range">
+
+    <div class="mordor"></div>
+
+    <custom-input name="email"></custom-input>
+    <label>this was red;</label>
+
+    <template id="template1">
+        <label>input information</label><input>
+        <style>label {color : blue}</style>
+    </template>
+    
+
+
+    <script>
+        document.querySelector('.mordor').attachShadow({mode : 'open'});
+        document.querySelector('.mordor').shadowRoot.innerHTML = '<p>came from the darkness</p>';
+        // attachShadow() : shadowRoot라는 공간을 만듦.
+        // shadowRoot 에 원하는 html을 숨길 수 있음. 
+        // 거의 모든 <태그>는 shadowRoot를 오픈할 수 있고 shadowRoot안에 넣은걸 전부 shadow DOM 이라고 부름.
+
+        class custom extends HTMLElement {
+            connectedCallback(){
+                let name = this.getAttribute('name');
+                this.attachShadow({mode : 'open'});
+                // this.shadowRoot.innerHTML = 
+                // `
+                //     <label>input ${name}</label><input>
+                //     <style> label {color : red} </style>
+                // `;
+                this.shadowRoot.append(template1.content.cloneNode(true));
+                
+                // event
+                this.shadowRoot.querySelector('label').addEventListener('mouseover',function(){
+                    console.log('mouseover')
+                })
+            }
+        }
+        customElements.define('custom-input', custom);
+        // *** 위처럼 shadow DOM 에 스타일과 태그들을 집어 넣으면, 다른 태그들 스타일을 오염시키지 않음. 
+
+        // <template>은 특수한 태그인데 여기에 적은 html은 렌더링되지 않음.
+
+
+
+    </script>
+</body>
+</html>

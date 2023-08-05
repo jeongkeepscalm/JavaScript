@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<title>Document</title>
+<style>
+    .card-background {
+    height: 3000px;
+    margin-top: 800px;
+    margin-bottom: 1600px;
+    }
+
+    .card-box img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+    }
+    .card-box {
+    position: sticky;
+    top: 400px;
+    margin-top: 200px;
+    }
+</style>
+</head>
+<body>
+    <div class="card-background">
+        <div class="card-box">
+          <img src="./card1.png">
+        </div>
+        <div class="card-box">
+          <img src="./card2.png">
+        </div>
+        <div class="card-box">
+          <img src="./card3.png">
+        </div>
+    </div>
+    <!-- 
+1. 실은 "스크롤바높이가 650~1150이 될 때 1~0이 되는 가변적인 값" y는 중학교 때 배운적이 있습니다. 
+
+그래프로 표현해보면 이렇습니다. 
+
+그림으로 표현해보면 이렇지 않습니까. 
+
+높이가 650~1150 이렇게 변할 때 1에서 0이 되는건 저런 그래프로 표현할 수 있을 것 같습니다. 
+
+(여기서 높이라는건 아까 출력해본 높이 변수입니다)
+
+이걸 어려운 수학용어로 1차함수라고 부릅니다요. 
+
+2. 그럼 이걸 수식으로 표현해봅시다. 
+
+//수학시간
+y = a * 높이 + b
+y에 대한 1차함수는 우리가 뭐 기울기 이런걸 모를 때 일단 ax+b 이런 식으로 표현할 수 있다고 배웠습니다.
+
+그럼 a랑 b라는 미지수만 잘 구하면 y가 뭔지 알 수 있는거네요? 
+
+a는 전문용어로 기울기, b는 전문용어로 y절편이라고 합니다만 
+
+그건 너무 어려우니 우리는 대입법을 이용해보도록 합시다. 
+
+3. a,b를 구하는건 대입법을 이용합니다. 
+
+위의 함수는
+
+높이가 650일 때 y가 1, 
+
+높이가 1150일 때 y가 0입니다. 
+
+//수학시간
+1 = a * 650 + b
+0 = a * 1150 + b
+그럼 이렇게 대입해봐도 맞겠죠? 
+
+방정식이 두개고 미지수가 두개면 충분히 풀 수 있습니다. 
+
+그래서 연습장에 방정식을 잘 풀어보시면 
+//수학시간
+1 = a * 650 + b
+0 = a * 1150 + b
+
+a = -1/500
+b = 115/50
+이렇게 나옵니다. 분수를 약분하고 그런건 필요없습니다. 
+그럼 a와 b값을 아까 y를 표현하던 수식에 대입하면 
+//다시 자바스크립트 
+var y = -1/500 * 높이 + 115/50
+     -->
+
+    <script>
+        $(window).scroll(function(){
+            var height = $(window).scrollTop();
+            console.log(height);
+
+            var y =  -1/500 * height + 115/50;
+            $('.card-box').eq(0).css('opacity', y);
+
+            var z = (-1/5000) * height + 565/500;
+            $('.card-box').eq(0).css('transform', `scale( ${z} )`);
+        });
+    </script>
+
+    <!-- 거의 모든 자바스크립트 라이브러리는 <body> 끝나기 전에 넣는 것을 권장 : 페이지 로드 성능 때문에 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

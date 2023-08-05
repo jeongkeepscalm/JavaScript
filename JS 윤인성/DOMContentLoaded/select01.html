@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const select = document.querySelector('select');
+      const p = document.querySelector('p');
+
+      select.addEventListener('change',(e)=>{
+        const options = e.currentTarget.options // 옵션 4개를 다 가져오고,
+        const list = []
+        for (const option of options) {
+          if (option.selected) {
+            list.push(option.textContent)
+          }
+        }
+        p.textContent = `선택 : ${list.join(',')}`
+      })
+    })
+
+
+   
+
+  </script>
+</head>
+
+<body>
+  <!-- multiple을 쓰면 여러개 값 가져오기 가능 -->
+  <select name="" id="" multiple> 
+    <!-- option*4 enter -->
+    <option value="">떡볶이</option>
+    <option value="">순대</option>
+    <option value="">튀김</option>
+    <option value="">오뎅</option>
+  </select>
+  <p>선택 :</p>
+</body>
+</html>

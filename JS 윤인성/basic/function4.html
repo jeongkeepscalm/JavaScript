@@ -1,0 +1,75 @@
+<script>
+
+// // test는 함수를 매개변수로 받는 상수.
+//   const test = function (a) {
+//     a();
+//   }
+
+//   const hi = function (){
+//     document.write(`You're welcome.`);
+//   }
+
+//   test(hi);
+
+
+//   const test2 = function(arrays, CF){
+//     for (let array of arrays ) {
+//       CF(array);
+//     }
+//   }
+//   const F = function(num_of_CF) {
+//     console.log(`${num_of_CF} 번째 손님이십니다.`);
+//   }
+//   test2([53,22,79,1],F);
+
+
+
+
+
+// // forEach(), filter(), map(),
+// // (보통 value 와 index 만 주로 사용)
+// let array2 = [45,78,21,722,6];
+// array2.forEach(function (value, index, array) {
+//   console.log(value, index, array)
+// });
+// array2.forEach(function (value, index) {
+//   console.log(`index : ${index}, value: ${value}`);
+// });
+// // index : 0, value: 45
+// // function4.html:36 index : 1, value: 78
+// // function4.html:36 index : 2, value: 21
+// // function4.html:36 index : 3, value: 722
+// // function4.html:36 index : 4, value: 6
+
+
+
+// array2 = array2.filter(function(v, i) {
+//   return v % 2 === 0
+// })
+// console.log(array2);
+// array2 = array2.filter((v,i) =>  v % 2 === 0);
+// console.log(array2);
+// // (3) [78, 722, 6]
+
+
+// // array2 = array2.map(function(v,i){
+// //   return "**" + v + "**";
+// // })
+// // console.log(array2);
+// array2 = array2.map((v,i) => v+ "!!");
+// console.log(array2); -->
+
+
+
+strings = ['oh','jeong','gil']
+strings.forEach(function(v,i) {
+  console.log(`value = ${v}, index = ${i}`)
+});
+
+strings1 = strings.filter((v,i)=>v.indexOf('on') > 0) // indexOf('찾을 문자열') 문자열이 없다면 -1 리턴. 
+console.log(strings1)
+
+strings2 = strings.map((v,i)=> v+"**")
+console.log(strings2)
+
+</script>

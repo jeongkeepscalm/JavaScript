@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var 변수 = '손흥민';
+        function 해체분석기(문자들, 변수들){
+        console.log(문자들);
+        console.log(변수들);
+        }
+        // `문자열`을 이용해서 실행
+        해체분석기`안녕하세요 ${변수} 입니다`;
+
+        function 해체분석기2(문자들, 변수들){
+            console.log(문자들[1] + 변수들);
+        }
+        해체분석기2`안녕하세요 ${변수} 입니다`;
+
+
+        // tagged literal : 첫째파라미터로 모든 글자들을 받아와서 Array에 담고, 나머지 파라미터에는 변수가 담김. 
+        var pants = 20;
+        var socks = 100;
+        // 1.
+        function analize(chars, vars1, vars2) {
+            // console.log(chars)
+            // console.log(vars1)
+            // console.log(vars2)
+            console.log(chars[1] + vars2+ chars[0] + vars1)
+        }
+        console.log(`--- 바지${pants}양말${socks}`);
+        analize`바지${pants}양말${socks}`;
+
+
+        // 2. 해체분석기`바지${pants} 양말${socks}` : pants라는 변수가 0인 경우 -> `바지다팔렸어요 양말100` 출력.
+        function analize2(chars, var1, var2) {
+            if (var1 === 0) {
+                console.log('바지다팔림 ' + chars[1] + var2)
+            } else {
+                console.log(chars[0] + var1 + chars[1] + var2);
+            }
+        }
+        analize2`바지${pants}양말${socks}`;
+
+
+
+
+    </script>
+</body>
+</html>

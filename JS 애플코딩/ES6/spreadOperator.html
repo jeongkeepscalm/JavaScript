@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // Spread Operator 
+        //      "괄호제거 해주는 연산자";
+        //      spread 연산자는 함수소괄호, 오브젝트 중괄호내, 어레이 대괄호내에서 보통 사용
+
+        var arr = ['hello', 'world'];
+        console.log(arr); 
+        console.log(...arr); 
+
+        var char = 'hello';
+        console.log(char[0]); // 문자 array처럼 출력 가능. 
+        console.log(char[1]);
+        console.log(char)
+        console.log(...char)
+        
+        // -------------- 1. 배열 합치기/복사 --------------
+        let a = [1,2,3];
+        let b = [4,5];
+        let c = [...a, ...b];
+        console.log(c)
+        console.log(...c)
+
+        let d = [1,2];
+        let e = d; // * 복사가 잘 되지만 d와 e는 값을 공유하게 됨. 
+        console.log(d)
+        console.log(e)
+        d.push(3)
+        console.log(e);
+
+        let aa = [...a]; // * 괄호에 씌워서 복사. 
+        aa.push(77)
+        console.log(a)
+        console.log(aa)
+
+        // -------------- 2. 객체 합치기/복사 --------------
+        var o1 = { a : 1, b : 2 };
+        var o2 = { c : 3, ...o1 };
+        console.log(o2);
+
+        var o3 = { a : 1, b : 2};
+        var o4 = { a : 3, ...o3 };
+        console.log(o4); // {a: 1, b: 2} : a라는 값이 중복이 발생하면 무조건 뒤에 오는 a가 적용.
+
+        // -------------- 3. 배열을 함수 파라미터에 넣을 때 --------------
+        function add (a,b,c) {
+            console.log(a + b + c);
+        }
+        let nums = [1,2,3];
+        add(...nums);
+
+ 
+        // apply()
+        var person = {
+            hello : function(){
+                console.log(this.name + '안녕')
+            }
+        }
+        
+        var person2 = {
+            name : '손흥민'
+        }
+
+        // apply : 파라미터를 array 로 한 번에 집어 넣기 가능. 
+        // call : array로 집어넣기 불가. 
+        person.hello.apply(person2, [1,2,3]); // person.인사()라는 함수를 쓰는데 person2라는 오브젝트에 적용해서 실행
+        person.hello.call(person2, 1,2,3);
+
+    </script>
+</body>
+</html>

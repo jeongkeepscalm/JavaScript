@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6 : class() constructor, prototype를 이용한 상속기능.
+        class 부모 {
+            constructor(이름, 나이){
+                this.name = 이름;
+                this.age = 나이;
+            }
+            sayHi(){ 
+                console.log('hello') 
+            }
+            sayHello(){
+                console.log('안녕하세요');
+            }
+        }
+        var 자식 =  new 부모('Park', 30);
+
+        console.log(자식);
+        console.log(Object.getPrototypeOf(자식))
+        console.log(자식.__proto__);
+        console.log(Object.getPrototypeOf(자식) === 자식.__proto__)
+
+        
+    </script>    
+</body>
+</html>

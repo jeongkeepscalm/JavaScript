@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <c-input name="id"></c-input>
+    <c-input name="pwd"></c-input>
+    <script>
+
+        // Web Component 문법 : html을 컴포넌트로 축약해서 사용.
+
+        class custom extends HTMLElement {
+            // connectedCallback() 함수는 컴포넌트가 html에 장착될 때 실행.
+            connectedCallback() {
+                let name = this.getAttribute('name')
+                this.innerHTML = `<label>input ${name}</label><input>`
+            }
+
+            static get observedAttributes(){
+                return ['name']
+            }
+            attributeChangedCallback(){
+                // attribute 변경 시, 실행될 코드. 
+            }
+        }
+        customElements.define('c-input', custom);
+    </script>
+
+</body>
+</html>

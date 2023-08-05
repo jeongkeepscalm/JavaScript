@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark">Dark 🔄</span>
+            <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+    </ul>
+
+    <button id="loginBtn">Login</button>
+    
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+
+            <form action="success.html">
+                <div class="my-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="my-3">
+                    <input type="password" class="form-control">
+                    <p></p>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">전송</button>
+                <button type="button" class="btn btn-danger" id="close">닫기</button>
+            </form>
+        </div>
+    </div>
+
+    
+
+    
+    <script>
+        // 클래스는 인덱스를 지정해주어야 한다. 
+        document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
+            // document.getElementsByClassName('list-group')[0].classList.add('show');
+            document.getElementsByClassName('list-group')[0].classList.toggle('show'); // 있으면 추가, 없으면 삭제
+        })
+
+        // querySelector() : 맨 위에 나오는 한 개만 찾아줌. 
+        document.querySelector('.list-group-item').style.color = 'blue';
+
+        // querySelectorAll()
+        document.querySelectorAll('.list-group-item')[1].style.color = 'red';
+
+
+        document.getElementById('loginBtn').addEventListener('click', function(){
+            document.getElementsByClassName('black-bg')[0].classList.add('show-modal')
+        })
+
+        $('#close').on('click', function(){
+            $('.black-bg').removeClass('show-modal');
+        })
+
+        $('form').on('submit', function (e){
+            if (document.querySelectorAll('input[type=text]')[0].value === '') {
+                e.preventDefault();
+                alert('Input text');
+                return;
+            }
+            if (document.querySelectorAll('input[type=password]')[0].value.length < 6) {
+                e.preventDefault();
+                alert('length of password is more than 6');
+                return;
+            }
+
+            let regEmail = /\S+@\S+\.\S+/;
+            let inputEmail = document.querySelectorAll('input[type=text]')[0].value;
+            if(!regEmail.test(inputEmail)) {
+                e.preventDefault();
+                alert('이메일 형식이 아니다.')
+            }
+            
+            let regPassword = /[A-Z]/;
+            let inputPassword = document.querySelectorAll('input[type=password]')[0].value;
+            if (!regPassword.test(inputPassword)){
+                e.preventDefault();
+                alert('password does not include uppercase letter');
+            }
+
+        })
+
+        // change : input text에서 focus out 될 때 실행.
+        // input : 값이 변할 때마다 실행. 
+        document.querySelector('input[type=password]').addEventListener('input', function(){
+            let length = document.querySelectorAll('input[type=password]')[0].value.length;
+            if (length !== 0) {
+                document.querySelectorAll('input[type=password]')[0].nextElementSibling.style.color = 'red';
+                document.querySelectorAll('input[type=password]')[0].nextElementSibling.innerText = 'password Length : ' + length;
+            } else {
+                document.querySelectorAll('input[type=password]')[0].nextElementSibling.innerText = '';
+            }
+        })
+
+        let count = 0; 
+        document.getElementsByClassName('bg-dark')[0].addEventListener('click', function(){
+            ++count;
+            document.getElementsByTagName('body')[0].classList.toggle('dark');
+            if (count % 2 !== 0 ) {
+                document.getElementsByClassName('bg-dark')[0].innerText = 'Light 🔄';
+                // document.getElementsByTagName('body')[0].classList.add('dark');
+            } else {
+                document.getElementsByClassName('bg-dark')[0].innerText = 'Dark 🔄';
+                // document.getElementsByTagName('body')[0].classList.remove('dark');
+            }
+        })
+
+         document.getElementsByClassName('black-bg')[0].addEventListener('click', function(e){
+            // console.log(e.target) // 실제 클릭한 요소 알려줌 (이벤트 발생한 곳)
+            // console.log(e.currentTarget) // this 와 같음. 
+            // console.log(this)
+            // console.log(e.preventDefault());
+            // console.log(e.stopPropagation()); // 내 상위요소로의 이벤트 버블링을 중단해줌
+
+            // if(e.target === document.querySelector('.black-bg')){
+            if(e.target === e.currentTarget){
+                document.querySelector('.black-bg').classList.remove('show-modal');
+            }
+        })
+
+
+    </script>
+
+    <!-- 거의 모든 자바스크립트 라이브러리는 <body> 끝나기 전에 넣는 것을 권장 : 페이지 로드 성능 때문에 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

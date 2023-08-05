@@ -1,0 +1,24 @@
+<script>
+  const a = [53, "add", 123, "zzz"];
+  a.push("pushed String");
+  console.log(a[a.length-1]); // 배열 제일 끝 요소(element) 가져오기.
+  console.log(a.indexOf(123)); // 2
+  console.log(a.indexOf('random num')); // -1
+
+  // splice()
+  a.splice(1,0, 1598); // [53, 1598, 'add', 123, 'zzz', 'pushed String'] 
+  a.splice(1,1, 'delete 1598'); // [53, 'delete 1598', 'add', 123, 'zzz', 'pushed String']
+
+  // 배열 안 특정값 삭제하기.(indexOf() / splice())
+  const index = a.indexOf("delete 1598"); 
+  a.splice(index, 3); // 인덱스 1,2,3 삭제.  53,zzz,pushed String
+
+// a.splice(index, 0, element); 특정 인덱스자리에 요소 추가.
+// a.splice(index, 1); 특정 인덱스자리에 있는 요소 삭제.
+
+  let b = [1,2,3,4,5]
+  b.splice(1,3,'splice') // 1, aplice, 5
+
+
+  
+</script>

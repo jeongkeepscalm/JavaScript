@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const input = document.querySelector('input');
+      const p = document.createElement('p')
+
+      input.addEventListener('keyup',()=>{
+        p.textContent=`${input.value * 2.54}cm 로 변환`
+      })
+
+      document.body.appendChild(p)
+    })
+  </script>
+</head>
+<body>
+  <form>
+    <input type="text" name="text" id="text">
+  </form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 0.
+        function students(name, age) {
+            this.name=name;
+            this.age=age;
+            // this.sayHi = function (){
+            //     console.log(`Hello, I'm ${this.name}`);
+            // }
+        }
+        students.prototype.sayHi = function() {
+            console.log(`Hello, I'm ${this.name}`);
+        }
+        let student1 = new students('kim', 20);
+        let student2 = new students('park', 23);
+        let student3 = new students('lee', 21);
+        student3.sayHi();
+
+        // 1. 
+        function Parent(){
+            this.name = 'Kim';
+        }
+        var a = new Parent();
+        console.log("proto.name : "+a.__proto__.name)
+
+        a.__proto__.name = 'Park';
+        console.log(a.name) 
+        // a.__proto__.name : 'Park' 
+        // a.name : 'Kim'
+        // a.name 이라고 사용했을 때 내가 직접 가지고 있는 { name : 'Kim' } 이걸 우선 출력
+
+
+        // 2.
+        
+        var arr = [1,2,3,4,5];
+        Array.prototype.remove3 = function(){
+            let result = [...this].filter(function(v){
+                return v !== 3;
+            })
+            return result;
+
+            // Another Way
+            // for (var i = 0; i < this.length; i++) {
+            //     if ( this[i] === 3 ) {
+            //         this.splice(i,1);
+            //     }
+            // }
+        }
+        console.log(arr.remove3());
+
+
+
+
+
+    </script>
+</body>
+</html>

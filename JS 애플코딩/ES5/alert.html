@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert-box" id="alert">
+        <p>Alert</p>
+        <button id="closeBtn">x</button>
+    </div>
+
+    <button onclick="switchAlert('block', 'Input ID');" id="btn1">btn1</button>
+    <button onclick="switchAlert('block', 'Input PW');" id="btn2">btn2</button>
+    
+    <script>
+        function switchAlert(state, text) {
+            document.getElementById('alert').style.display = state;
+            document.getElementById('alert').children[0].innerHTML = text;
+        }
+        document.getElementById('closeBtn').addEventListener('mouseover', function (){
+            switchAlert('none');
+        })
+    </script>
+</body>
+</html>

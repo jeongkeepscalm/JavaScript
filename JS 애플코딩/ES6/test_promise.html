@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+</head>
+<body>
+
+    <img id="test" src="https://codingapple1.github.io/kona.jpg">
+
+
+    <script>
+
+        // 1. 
+        let promise = new Promise(function(success, fail){
+            document.getElementById('test').addEventListener('load', function(){
+                success();
+            })
+            document.getElementById('test').addEventListener('error', function(){
+                fail();
+            })
+        })
+        promise.then(function(){
+            console.log('image loaded')
+        }).catch(function(){
+            console.log('image loading error')
+        }).finally(function(){
+
+        })
+
+        // 2. 
+        let promise2 = new Promise(function(resolve, reject){
+            $.get('https://codingapple1.github.io/hello.txt')
+            .done(function(res){
+                resolve(res);
+            })
+        })
+        promise2.then(function(res){
+            console.log(res);
+
+            let promise3 = new Promise(function(resolve, reject) {
+                $.get('https://codingapple1.github.io/hello2.txt')
+                .done(function(res){
+                    resolve(res);
+                })
+            });
+            return promise3;
+            // promise3.then(function(res){
+            //     console.log(res);
+            // })
+        }).then(function(res){
+            console.log(res);
+        })
+
+
+    </script>
+</body>
+</html>

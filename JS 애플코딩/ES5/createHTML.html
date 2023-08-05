@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script>
+
+        // way 1
+        let tag_p = document.createElement('p');
+        tag_p.innerHTML = 'for test';
+        document.querySelector('#test').appendChild(tag_p);
+
+        // way 2
+        let a = '<p>FOR TEST</p>';
+        document.getElementById('test').insertAdjacentHTML('beforeend',a);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+    /a/.test('abcde')  //true
+
+    /[a-d]/.test('aefg')  //true
+    /[가-다]/.test('다라마바')  //true
+
+    /[a-zA-Z]/.test('반가워요')  //false
+    /[a-zA-Z]/.test('반가워요a') //true
+    /[ㄱ-ㅎ가-힣ㅏ-ㅣ]/.test('반가워요')  //true
+
+    /\S/.test('abcde')   //true 특수문자 포함 아무문자 1개
+
+    /^a/.test('abcde')   //true a로 시작
+    /e$/.test('abcde') //true e로 끝나는지
+
+    /(e|f)/.test('abcde')   //true
+
+    /a+/ // + 기호를 붙여주시면 뒤에 오는 글자들도 a와 일치하면 반복해서 쭉 찾아달라는 뜻입니다.
+
+    /\S+t/ // 모든 문자 여러개 다음에 t라는 글자가 있냐를 검사해주는 정규식입니다. aaaat, bbbt...
+
+    /\S+@\S+\.\S+/ // 이메일 정규식 

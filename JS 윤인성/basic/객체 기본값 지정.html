@@ -1,0 +1,29 @@
+<script>
+
+  const ways = function(obj) {
+    obj.status = obj.status !== undefined ? obj.status : '이상 없음'
+    obj.status = obj.status ? obj.status : '이상 없음'
+    obj.status = obj.status || '이상 없음'
+    obj = {status : '이상 없음', ...obj}
+    return `${obj.name}, ${obj.age}, ${obj.status}`
+  }
+
+  console.log(ways({
+    name : '오정길',
+    age : 30
+  }))
+  
+  const dog =  {
+    name:'흰둥이',
+    age:7,
+    status:`다리가 아파요`
+  }
+  console.log(ways(dog))
+
+  const newDog = {
+    ...dog, // 해당 객체의 속성을 가져옴(상속과 비슷한 역할 같음)  
+    status:'바닦을 뜯어요'
+  }
+  console.log(ways(newDog))
+
+</script>

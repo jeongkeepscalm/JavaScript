@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Symbol() : Object자료형에 비밀스런 key값을 부여하고싶을 때 사용. 
+        // 반복문에서 감지 못함. 
+
+        var person = {name : 'jeonggil'};
+        person.weight = 70;
+        var weight = Symbol('real weight');
+        person[weight] = 200; // 키, 벨류로 저장. Symbol(real weight) : 200
+
+        console.log(person)
+        
+        // Object 자료형에 직접 입력하실 때는 저렇게 대괄호안에 심볼명을 담아 저장. 
+        var height = Symbol('my height');
+        var person = {name : 'ojg', [height] : 180};
+        console.log(person)
+        
+
+        var a = Symbol('ex');
+        var b = Symbol('ex');
+        console.log(a === b); // false : Symbol()이라고 사용할 때마다 각각 유니크한 Symbol이 생성
+
+        var a = Symbol.for('ex2');
+        var b = Symbol.for('ex2'); 
+        console.log(a === b); // true : 설명이 같으면 이미 그 설명을 가지고 있는 Symbol을 그 자리에 집어넣음. 
+
+
+        
+
+
+    </script>
+</body>
+</html>

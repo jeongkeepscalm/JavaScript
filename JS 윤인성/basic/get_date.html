@@ -1,0 +1,13 @@
+<script>
+  const date = new Date();
+  const hours = date.getHours();
+
+  if (hours > 12 && hours < 18) {
+    alert(`this time is ${hours} and afternoon`);
+  } else if (hours >18 && hours <24) {
+    alert(`this time is ${hours} and evening`);
+  } else {
+    alert(`this time is ${hours} and morning`);
+  };
+
+</script>

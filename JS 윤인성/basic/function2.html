@@ -1,0 +1,28 @@
+<script>
+
+// 배열 내 최솟값 구하기.
+const min = function(arrays){
+  let output = arrays[0];
+  for(let array of arrays) {
+    if (output > array) {
+      output = array;
+    }
+  }
+  return output;
+}
+console.log(min([45,22,89,14,5,87,44]));
+
+
+// 배열 내 최댓값 구하기
+const max = function(arrays) {
+  let output = arrays[0];
+  for (let array of arrays){
+    if (output < array) {
+      output = array;
+    }
+  }
+  return output;
+}
+console.log(max([45,23,55,2,57,93,3]));
+  
+</script>

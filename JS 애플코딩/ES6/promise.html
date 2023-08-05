@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // promise : 성공 & 실패 판정
+        // 첫번째 파라미터를 함수형태로 작성하면 성공
+        // 두번째 파라미터를 함수형태로 작성하면 실패
+        // then : 성공 시
+        // catch : 실패 시 
+        let pm = new Promise(function (success, fail){
+            var v = 1 + 1;
+            setTimeout(function(){
+                success(v);
+            },5000)
+        });
+
+        pm.then(function(v){
+            console.log(`result : ${v}`)
+        }).catch(function(){
+            console.log('연산 실패')
+        })
+
+    </script>
+</body>
+</html>
